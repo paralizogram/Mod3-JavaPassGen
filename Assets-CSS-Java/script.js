@@ -3,13 +3,14 @@ var generateBtn = document.querySelector("#generate"); // link to html button id
 
 // tried plcing these variables within generatePassword function, but got error, so moved out, so function could call on them?
 // could toLowerCase() / toUpperCase() methods be useful here at all?
+  var length = []; // this doesn't seem right... should be some kind of function to set length parameter, based on input?
   var characterTypes = ["length, lowerCase, uppercase, specialChar"]; // not sure what I'm doing here, can this be an array of arrays?
-  var length = [];
   var lowerCase = ["a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, z"];
   // UpperCase = LowerCase.toUpperCase(); I wouldn't know how to make this work...
-  var upperCase = ["A, "];
-  var specialChar = [];
+  var upperCase = ["A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X, Y, Z"];
+  var specialChar = [" ", "!", "", "#", "$", "%", "&", "'", "(", ")", "*", "+", ",", "-", ".", "/", ":", ";", "<", "=", ">", "?", "@", "[", "]", "^","`", "{", "|", "}", "~"]; // not sure how to deal with some characters on list, like spaces, double quotes, etc - double quoting each did not work,left a few out that were messing up the array, like " & _ symbols
 
+  // do I need to add a randomizing feature for this function?
   function generatePassword() {
  
   return 
