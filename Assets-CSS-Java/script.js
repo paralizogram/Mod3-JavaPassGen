@@ -1,33 +1,31 @@
 // Assignment Code
 var generateBtn = document.querySelector("#generate"); // link to html button id, line 28?
 
-// could toLowerCase() / toUpperCase() methods be useful here at all?
-charTypes = []; // array of arrays chosen through prompts
-
+// var charTypes = []; // array of arrays chosen through prompts
+// var length = []; // should I leave this? It functions without being listed here.
 var lowerCase = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
-  // UpperCase = LowerCase.toUpperCase(); I wouldn't know how to make this work... but seems like that could save some time
 var upperCase = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
 var specialChar = [" ", "!", "", "#", "$", "%", "&", "'", "(", ")", "*", "+", ",", "-", ".", "/", ":", ";", "<", "=", ">", "?", "@", "[", "]", "^","`", "{", "|", "}", "~"]; // not sure how to deal with some characters on list, like spaces, double quotes, etc - double quoting each did not work,left a few out that were messing up the array, like " & _ symbols
 var numbers = [0,1,2,3,4,5,6,7,8,9]
 
-// wanted to make sure array items properly listed
-// console.log(length);
-// console.log(length.length);
-// console.log(charTypes);
-// console.log(charTypes.length);
-// console.log(lowerCase);
-// console.log(lowerCase.length);
-// console.log(upperCase);
-// console.log(upperCase.length);
-// console.log(specialChar);
-// console.log(specialChar.length);
-// console.log(numbers);
-// console.log(numbers.length);
+
   // Add event listener to generate button
-  
   generateBtn.addEventListener("click", writePassword); // moved up, so flow is sequential. click button, generate password, then write password
   
+  
+  // Write password to the #password input
+  // do I need to add a randomizing feature for this function?
+
+  // MISSING something here. wrote writePassword() to console, and shows undefined
+function writePassword() {
+  var password = generatePassword(); 
+  var passwordText = document.querySelector("#password"); // link to html id, line 22?
+
+  passwordText.value = password; // display test "hello" instead of password worked
+
+}
   function generatePassword() {
+    let charTypes = []; // array of arrays chosen through prompts
     let length = parseInt(prompt("Enter a number between 8 and 128 to set your password length:")); // converts string "100" to number 100
 
     if(isNaN(length)) {
@@ -50,54 +48,22 @@ var numbers = [0,1,2,3,4,5,6,7,8,9]
     if(confirm("Do you want to include numbers in your password?"));{
       charTypes = charTypes.concat(numbers); // populates charType array to include numbers array
     }
-    console.log(charTypes);
-    console.log(charTypes.length); // something wrong with console log check. returns more items, even when saying no to some options?
 
-    return password
+    let password = "";
+    // couldn't get this to work until I realized math needs to be 'Math' - Capitals matter, ha!
+    for(var i =0; i < length; i++) {
+      var randomizer = Math.floor(Math.random() * charTypes.length); // looked up math.random, pair with math.floor (don't quite understand - seems related to rounding) and multiply by length of charType array (populated by user prompt arrays chosen)
+      password = password + charTypes[randomizer]; 
+    }
+
+    return password; // display test "works" instead of password or true worked
   }
 
 
-// Write password to the #password input
-function writePassword() {
-  var password = generatePassword(); 
-  // how to define this function? console says Uncaught ref Error: generatePassword is not defined
-  var passwordText = document.querySelector("#password"); // link to html id, line 22?
-
-  passwordText.value = password; // display
-
-}
-
-// do I need to add a randomizing feature for this function?
-
-
 // need to get input from user to generate password, https://www.w3schools.com/jsref/met_win_prompt.asp
-//function userPrompts() {
-   //if (length<8 || length>128);
-   //if (length=>8 && length<=128); // problem adding =
-   //confirm()
-//}
-
-// function userPrompts() {
-//   let text;
-//   let length = prompt("Enter a number between 8 and 128 to set your password length:");
-// }
+//function userPrompts() { Separate function for this or not? Tutor didn't suggest this
 
 
-// generatePassword function needs to be 'defined'so it can be used within writePassword function
-
-
-
-
-// TIP: Write pseudo-code out
-
-// 1. need a pop up window when user clicks button to gain password criteria
-    // 1.a Criteria: length option between 8 to 128 characters
-    // 1.b Criteria: character types? lowercase, uppercase, numeric &/or special characters
-      // do I need arrays for 'umbrella' character types?  
-      // do I need to add array options for each character type? TIP? READ ME includes link to list of password characters 
-            // ie. set parameters for length, then set character type options array, then define array for each char type option 
-
-      // 1.c HELP??? validate input? at least one character type should be selected (Meaning?)
 // 2. When all above prompts answered, password generated and either:
     // 1. Display in an alert (pop up?)?
     // 2. Written to page? (in card where "Your secure password" initially written)
